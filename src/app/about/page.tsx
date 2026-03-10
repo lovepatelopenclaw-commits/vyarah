@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Section from "@/components/Section";
 import FadeIn from "@/components/FadeIn";
+import AnimatedCounter from "@/components/AnimatedCounter";
 
 export const metadata: Metadata = {
   title: "About — Vyarah",
@@ -101,9 +102,10 @@ export default function AboutPage() {
         <div className="flex flex-wrap gap-8">
           {stats.map((s) => (
             <div key={s.label}>
-              <span className="font-display font-bold text-2xl text-text">
-                {s.value}
-              </span>
+              <AnimatedCounter
+                target={s.value}
+                className="font-display font-bold text-2xl text-text"
+              />
               <p className="text-xs text-muted mt-1">{s.label}</p>
             </div>
           ))}

@@ -3,6 +3,7 @@
 import { useState, FormEvent } from "react";
 import Section from "@/components/Section";
 import FadeIn from "@/components/FadeIn";
+import { LoadingIndicator } from "@/components/LoadingIndicator";
 
 const serviceOptions = [
   "Web Development",
@@ -188,9 +189,13 @@ export default function ContactPage() {
             <button
               type="submit"
               disabled={status === "sending"}
-              className="text-sm bg-primary text-text px-6 py-2.5 rounded-lg hover:opacity-90 transition-opacity duration-150 disabled:opacity-50"
+              className="text-sm bg-primary text-text px-6 py-2.5 rounded-lg hover:opacity-90 transition-opacity duration-150 disabled:opacity-50 flex items-center gap-2"
             >
-              {status === "sending" ? "Sending..." : "Send Message"}
+              {status === "sending" ? (
+                <LoadingIndicator text="Sending" showChevron={false} className="text-sm" />
+              ) : (
+                "Send Message"
+              )}
             </button>
 
             {status === "sent" && (

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const links = [
   { href: "/", label: "Home" },
@@ -14,6 +15,10 @@ const links = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <nav className="sticky top-0 z-50 bg-bg/80 backdrop-blur-md border-b border-border">
@@ -28,7 +33,11 @@ export default function Navbar() {
             <Link
               key={l.href}
               href={l.href}
-              className="text-sm text-muted hover:text-text transition-colors duration-150"
+              className={`text-sm transition-colors duration-150 ${
+                isActive(l.href)
+                  ? "text-text border-b border-primary pb-0.5"
+                  : "text-muted hover:text-text"
+              }`}
             >
               {l.label}
             </Link>
@@ -72,7 +81,11 @@ export default function Navbar() {
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="block py-2 text-sm text-muted hover:text-text transition-colors duration-150"
+              className={`block py-2 text-sm transition-colors duration-150 ${
+                isActive(l.href)
+                  ? "text-text font-medium"
+                  : "text-muted hover:text-text"
+              }`}
             >
               {l.label}
             </Link>

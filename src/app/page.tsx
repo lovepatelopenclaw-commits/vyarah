@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Section from "@/components/Section";
 import FadeIn from "@/components/FadeIn";
+import AnimatedCtaButton from "@/components/AnimatedCtaButton";
 
 const services = [
   {
@@ -114,13 +115,8 @@ export default function Home() {
             From idea to launch — web apps, mobile apps, AI tools &amp;
             automation for modern businesses.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/contact"
-              className="text-sm bg-primary text-text px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity duration-150"
-            >
-              Get Free Consultation
-            </Link>
+          <div className="mt-8 flex flex-wrap gap-3 items-center">
+            <AnimatedCtaButton href="/contact" />
             <Link
               href="/portfolio"
               className="text-sm border border-border text-muted px-5 py-2.5 rounded-lg hover:text-text hover:border-muted transition-colors duration-150 bg-bg/60"
@@ -250,12 +246,12 @@ export default function Home() {
               Tell us about your project and get a free consultation. No
               commitment, no pressure.
             </p>
-            <Link
+            <AnimatedCtaButton
               href="/contact"
-              className="inline-block mt-6 text-sm bg-primary text-text px-6 py-2.5 rounded-lg hover:opacity-90 transition-opacity duration-150"
-            >
-              Book Free Consultation
-            </Link>
+              idleText="Book Free Consultation"
+              activeText="Start Your Project"
+              className="mt-6"
+            />
           </div>
         </FadeIn>
       </Section>
