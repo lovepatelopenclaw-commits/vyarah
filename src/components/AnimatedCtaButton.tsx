@@ -1,109 +1,98 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { Sparkles } from "lucide-react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { MagneticButton } from "@/components/ui/magnetic-button";
 
 interface AnimatedCtaButtonProps {
-  idleText?: string;
-  activeText?: string;
+  text?: string;
   href?: string;
   onClick?: () => void;
+  variant?: "primary" | "outline";
   className?: string;
 }
 
 export default function AnimatedCtaButton({
-  idleText = "Get Free Consultation",
-  activeText = "Let\u2019s Build Together",
+  text = "Get Free Consultation",
   href,
   onClick,
+  variant = "primary",
   className,
 }: AnimatedCtaButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const [displayText, setDisplayText] = useState(idleText);
-  const [isAnimating, setIsAnimating] = useState(false);
 
-  const animateText = useCallback(
-    (target: string) => {
-      if (isAnimating) return;
-      setIsAnimating(true);
-
-      const chars = target.split("");
-      let current = "";
-      let i = 0;
-
-      const interval = setInterval(() => {
-        if (i < chars.length) {
-          current += chars[i];
-          setDisplayText(current + "\u00A0".repeat(target.length - current.length));
-          i++;
-        } else {
-          clearInterval(interval);
-          setDisplayText(target);
-          setIsAnimating(false);
-        }
-      }, 30);
-
-      return () => clearInterval(interval);
-    },
-    [isAnimating]
-  );
-
-  useEffect(() => {
-    if (isHovered) {
-      const cleanup = animateText(activeText);
-      return cleanup;
-    } else {
-      setDisplayText(idleText);
-      setIsAnimating(false);
-    }
-  }, [isHovered, idleText, activeText, animateText]);
+  const isPrimary = variant === "primary";
 
   const content = (
-    <>
-      <Sparkles
-        size={16}
+    <span className="relative z-10 flex items-center gap-2">
+      <span>{text}</span>
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
         className={cn(
-          "shrink-0 transition-transform duration-300",
-          isHovered ? "rotate-12 scale-110" : ""
+          "transition-all duration-300",
+          isHovered ? "translate-x-1 opacity-100" : "translate-x-0 opacity-0"
         )}
-      />
-      <span className="relative overflow-hidden whitespace-nowrap font-medium">
-        {displayText}
-      </span>
-    </>
+      >
+        <path
+          d="M3.5 8H12.5M12.5 8L9 4.5M12.5 8L9 11.5"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </span>
   );
 
   const sharedClasses = cn(
-    "inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm",
-    "bg-primary text-text",
-    "hover:shadow-[0_0_24px_rgba(168,85,247,0.4)]",
-    "transition-all duration-300",
-    "border border-primary/30 hover:border-primary/60",
+    "group relative inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium rounded-full overflow-hidden transition-all duration-300",
+    isPrimary
+      ? [
+          "bg-gradient-to-r from-primary via-purple-500 to-secondary text-white",
+          "shadow-[0_0_0_0_rgba(168,85,247,0)] hover:shadow-[0_0_24px_-4px_rgba(168,85,247,0.5)]",
+        ]
+      : [
+          "bg-transparent text-muted hover:text-text",
+          "border border-border hover:border-primary/50",
+          "hover:shadow-[0_0_20px_-6px_rgba(168,85,247,0.3)]",
+        ],
     className
   );
 
-  const inner = href ? (
-    <a
-      href={href}
-      className={sharedClasses}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {content}
-    </a>
-  ) : (
-    <button
-      type="button"
-      onClick={onClick}
-      className={sharedClasses}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+  const handlers = {
+    onMouseEnter: () => setIsHovered(true),
+    onMouseLeave: () => setIsHovered(false),
+  };
+
+  if (href) {
+    return (
+      <a href={href} className={sharedClasses} {...handlers}>
+        {isPrimary && (
+          <span
+            className={cn(
+              "absolute inset-0 bg-gradient-to-r from-secondary via-primary to-purple-500 opacity-0 transition-opacity duration-500",
+              isHovered && "opacity-100"
+            )}
+          />
+        )}
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <button type="button" onClick={onClick} className={sharedClasses} {...handlers}>
+      {isPrimary && (
+        <span
+          className={cn(
+            "absolute inset-0 bg-gradient-to-r from-secondary via-primary to-purple-500 opacity-0 transition-opacity duration-500",
+            isHovered && "opacity-100"
+          )}
+        />
+      )}
       {content}
     </button>
   );
-
-  return <MagneticButton>{inner}</MagneticButton>;
 }

@@ -109,7 +109,7 @@ export default function ServicesPage() {
 
               <Link
                 href="/contact"
-                className="inline-block mt-5 text-sm bg-primary text-text px-5 py-2.5 rounded-full hover:shadow-[0_0_20px_rgba(168,85,247,0.3)] transition-all duration-300 border border-primary/30 hover:border-primary/60"
+                className="inline-block mt-5 text-sm bg-gradient-to-r from-primary via-purple-500 to-secondary text-white px-5 py-2 rounded-full hover:shadow-[0_0_20px_-4px_rgba(168,85,247,0.5)] transition-all duration-300"
               >
                 Get a Quote
               </Link>

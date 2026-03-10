@@ -2,7 +2,6 @@ import Link from "next/link";
 import Section from "@/components/Section";
 import FadeIn from "@/components/FadeIn";
 import AnimatedCtaButton from "@/components/AnimatedCtaButton";
-import { MagneticButton } from "@/components/ui/magnetic-button";
 
 const services = [
   {
@@ -116,16 +115,13 @@ export default function Home() {
             From idea to launch — web apps, mobile apps, AI tools &amp;
             automation for modern businesses.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3 items-center">
+          <div className="mt-8 flex flex-wrap gap-4 items-center">
             <AnimatedCtaButton href="/contact" />
-            <MagneticButton distance={0.4}>
-              <Link
-                href="/portfolio"
-                className="text-sm border border-border text-muted px-6 py-3 rounded-full hover:text-text hover:border-muted transition-all duration-300 bg-bg/60 hover:shadow-[0_0_16px_rgba(255,255,255,0.05)]"
-              >
-                See Our Work
-              </Link>
-            </MagneticButton>
+            <AnimatedCtaButton
+              href="/portfolio"
+              text="See Our Work"
+              variant="outline"
+            />
           </div>
           <p className="mt-10 text-xs text-muted drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
             AWS Certified &middot; 10+ Projects Delivered &middot; Gujarat,
@@ -251,8 +247,7 @@ export default function Home() {
             </p>
             <AnimatedCtaButton
               href="/contact"
-              idleText="Book Free Consultation"
-              activeText="Start Your Project"
+              text="Book Free Consultation"
               className="mt-6"
             />
           </div>

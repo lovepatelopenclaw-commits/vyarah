@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MagneticButton } from "@/components/ui/magnetic-button";
 
 const links = [
   { href: "/", label: "Home" },
@@ -43,14 +42,12 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <MagneticButton distance={0.4}>
-            <Link
-              href="/contact"
-              className="text-sm bg-primary text-text px-5 py-2 rounded-full hover:shadow-[0_0_20px_rgba(168,85,247,0.3)] transition-all duration-300 border border-primary/30 hover:border-primary/60"
-            >
-              Get Free Consultation
-            </Link>
-          </MagneticButton>
+          <Link
+            href="/contact"
+            className="text-sm bg-gradient-to-r from-primary via-purple-500 to-secondary text-white px-5 py-2 rounded-full hover:shadow-[0_0_20px_-4px_rgba(168,85,247,0.5)] transition-all duration-300"
+          >
+            Get Free Consultation
+          </Link>
         </div>
 
         {/* Mobile hamburger */}
@@ -96,7 +93,7 @@ export default function Navbar() {
           <Link
             href="/contact"
             onClick={() => setOpen(false)}
-            className="block mt-2 text-sm text-center bg-primary text-text px-4 py-2 rounded-full hover:shadow-[0_0_20px_rgba(168,85,247,0.3)] transition-all duration-300 border border-primary/30 hover:border-primary/60"
+            className="block mt-2 text-sm text-center bg-gradient-to-r from-primary via-purple-500 to-secondary text-white px-5 py-2 rounded-full hover:shadow-[0_0_20px_-4px_rgba(168,85,247,0.5)] transition-all duration-300"
           >
             Get Free Consultation
           </Link>
