@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { MagneticButton } from "@/components/ui/magnetic-button";
 
 const links = [
   { href: "/", label: "Home" },
@@ -42,12 +43,14 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <Link
-            href="/contact"
-            className="text-sm bg-primary text-text px-4 py-2 rounded-lg hover:opacity-90 transition-opacity duration-150"
-          >
-            Get Free Consultation
-          </Link>
+          <MagneticButton distance={0.4}>
+            <Link
+              href="/contact"
+              className="text-sm bg-primary text-text px-5 py-2 rounded-full hover:shadow-[0_0_20px_rgba(168,85,247,0.3)] transition-all duration-300 border border-primary/30 hover:border-primary/60"
+            >
+              Get Free Consultation
+            </Link>
+          </MagneticButton>
         </div>
 
         {/* Mobile hamburger */}
@@ -93,7 +96,7 @@ export default function Navbar() {
           <Link
             href="/contact"
             onClick={() => setOpen(false)}
-            className="block mt-2 text-sm text-center bg-primary text-text px-4 py-2 rounded-lg hover:opacity-90 transition-opacity duration-150"
+            className="block mt-2 text-sm text-center bg-primary text-text px-4 py-2 rounded-full hover:shadow-[0_0_20px_rgba(168,85,247,0.3)] transition-all duration-300 border border-primary/30 hover:border-primary/60"
           >
             Get Free Consultation
           </Link>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Section from "@/components/Section";
 import FadeIn from "@/components/FadeIn";
 import AnimatedCtaButton from "@/components/AnimatedCtaButton";
+import { MagneticButton } from "@/components/ui/magnetic-button";
 
 const services = [
   {
@@ -117,12 +118,14 @@ export default function Home() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3 items-center">
             <AnimatedCtaButton href="/contact" />
-            <Link
-              href="/portfolio"
-              className="text-sm border border-border text-muted px-5 py-2.5 rounded-lg hover:text-text hover:border-muted transition-colors duration-150 bg-bg/60"
-            >
-              See Our Work
-            </Link>
+            <MagneticButton distance={0.4}>
+              <Link
+                href="/portfolio"
+                className="text-sm border border-border text-muted px-6 py-3 rounded-full hover:text-text hover:border-muted transition-all duration-300 bg-bg/60 hover:shadow-[0_0_16px_rgba(255,255,255,0.05)]"
+              >
+                See Our Work
+              </Link>
+            </MagneticButton>
           </div>
           <p className="mt-10 text-xs text-muted drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
             AWS Certified &middot; 10+ Projects Delivered &middot; Gujarat,

@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { MagneticButton } from "@/components/ui/magnetic-button";
 
 interface AnimatedCtaButtonProps {
   idleText?: string;
@@ -75,28 +76,24 @@ export default function AnimatedCtaButton({
   );
 
   const sharedClasses = cn(
-    "inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm",
+    "inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm",
     "bg-primary text-text",
-    "hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]",
+    "hover:shadow-[0_0_24px_rgba(168,85,247,0.4)]",
     "transition-all duration-300",
     "border border-primary/30 hover:border-primary/60",
     className
   );
 
-  if (href) {
-    return (
-      <a
-        href={href}
-        className={sharedClasses}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        {content}
-      </a>
-    );
-  }
-
-  return (
+  const inner = href ? (
+    <a
+      href={href}
+      className={sharedClasses}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {content}
+    </a>
+  ) : (
     <button
       type="button"
       onClick={onClick}
@@ -107,4 +104,6 @@ export default function AnimatedCtaButton({
       {content}
     </button>
   );
+
+  return <MagneticButton>{inner}</MagneticButton>;
 }
